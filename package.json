@@ -1,0 +1,16 @@
+{
+  "name": "grunt-nsis",
+  "version": "0.0.1",
+  "description": "NSIS Installing grunt module",
+  "author": "codeculture",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "q": "~1.0.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "lodash": "~2.4.1"
+  }
+}
