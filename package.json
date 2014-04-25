@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test"
   },
-  "devDependencies": {
+  "Dependencies": {
     "grunt": "~0.4.4",
     "q": "~1.0.1",
     "grunt-contrib-clean": "~0.5.0",
