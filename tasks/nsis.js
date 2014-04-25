@@ -41,6 +41,7 @@ module.exports = function (grunt) {
                         require('child_process').exec(cmd + ' ' + params.join(' '), function(err, stdout, stderr) {
                             if (!err) {
                                 defer.resolve(true, stdout, stderr);
+                                grunt.log.writeln(stdout);
                             } else {
                                 defer.reject(err, stdout, stderr);
                                 grunt.log.error(err);
