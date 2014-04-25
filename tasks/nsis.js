@@ -43,7 +43,9 @@ module.exports = function (grunt) {
                                 defer.resolve(true, stdout, stderr);
                             } else {
                                 defer.reject(err, stdout, stderr);
+                                grunt.log.error(err);
                             }
+                            done();
                         });
                     } else {
                         defer.reject('NSIS could not be found at "'+nsisExe+'"!');
