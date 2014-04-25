@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 
                     if (fs.existsSync(nsisExe)) {
                         // Debugging: console.log('executing: <'+cmd + ' ' + params.join(' ')+'>');
-                        console.log('executing: <'+cmd + ' ' + params.join(' ')+'>');
+                        //console.log('executing: <'+cmd + ' ' + params.join(' ')+'>');
                         require('child_process').exec(cmd + ' ' + params.join(' '), function(err, stdout, stderr) {
                             if (!err) {
                                 defer.resolve(true, stdout, stderr);
@@ -93,7 +93,5 @@ module.exports = function (grunt) {
             } else {
                 createNsisInstaller(false, path, params);
             }
-            grunt.log.writeln("test");
-
         });
 };
