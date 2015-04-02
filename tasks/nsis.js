@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         'nsisbuild',
         'Creating NSIS installer',
         function () {
-        //Functions
+            //Functions
             var isWineInstalled = function () {
                 var child = spawn('wine', ['--version']);
                 var result = '';
@@ -37,14 +37,16 @@ module.exports = function (grunt) {
 
                     if (fs.existsSync(nsisExe)) {
                         // Debugging: console.log('executing: <'+cmd + ' ' + params.join(' ')+'>');
-                        //console.log('executing: <'+cmd + ' ' + params.join(' ')+'>');
-                        require('child_process').exec(cmd + ' ' + params.join(' '), function(err, stdout, stderr) {
+                        //console.log('executing: <'+'cd '+ options.installerScriptPath + " && " +cmd + ' ' + params.join(' ')+'>');
+                        require('child_process').exec('cd '+ options.installerScriptPath + " && " +cmd + ' ' + params.join(' '), function(err, stdout, stderr) {
                             if (!err) {
                                 defer.resolve(true, stdout, stderr);
                                 grunt.log.writeln(stdout);
                             } else {
                                 defer.reject(err, stdout, stderr);
                                 grunt.log.error(err);
+                                grunt.log.error(stdout);
+                                grunt.log.error(stderr);
                             }
                             done();
                         });
@@ -61,19 +63,20 @@ module.exports = function (grunt) {
             //Do Work
             //-----------------
             var options = this.options({
-                nsisPath: '',
-                installerScriptPath: ''
-            }),
+                    nsisPath: '',
+                    scriptFile: '',
+                    installerScriptPath: ''
+                }),
                 done = this.async();
 
             // Check the target plattforms
-            if (!_.any(_.pick(options,"nsisPath","installerScriptPath"))) {
-                grunt.log.warn("Undefined nsisPath or installerScriptPath!");
+            if (!_.any(_.pick(options,"nsisPath","installerScriptPath","scriptFile"))) {
+                grunt.log.warn("Undefined nsisPath or installerScriptPath or scriptFile!");
                 return done();
             }
 
             var cmd = options.nsisPath + '/makensis.exe';
-            var params = [options.installerScriptPath];
+            var params = [options.scriptFile];
 
             //Init Deferer
             var defer = Q.defer();
